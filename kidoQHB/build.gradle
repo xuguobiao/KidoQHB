@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+
+    defaultConfig {
+        applicationId "com.everlastxgb.qianghongbao"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 100
+        versionName "1.0.0"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    signingConfigs {
+        release {
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles 'proguard-android.txt'
+            signingConfig signingConfigs.release
+        }
+
+    }
+
+    useLibrary 'org.apache.http.legacy'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.pgyersdk:sdk:2.4.0'
+}

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+            android:title="开启抢红包平台">
+
+        <com.everlastxgb.qianghongbao.widget.CustomSwitchPreference
+            android:defaultValue="true"
+            android:title="微信"
+            android:icon="@drawable/settings_ic_wechat"
+            android:key="KEY_ENABLE_WECHAT"/>
+
+        <com.everlastxgb.qianghongbao.widget.CustomSwitchPreference
+            android:defaultValue="true"
+            android:title="钉钉"
+            android:icon="@drawable/settings_ic_dingtalk"
+            android:key="KEY_ENABLE_DINGTALK"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="关于">
+        <Preference
+            android:title="@string/follow_preference_title"
+            android:summary="@string/follow_preference_summary"
+            android:key="KEY_FOLLOW_ME"/>
+
+        <Preference
+            android:title="@string/donate_title"
+            android:summary="@string/donate_summary"
+            android:key="KEY_DONATE_ME"/>
+
+        <Preference
+            android:title="@string/beforeuse_title"
+            android:summary="@string/beforeuse_summary"
+            android:key="KEY_BEFORE_USE"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="平台设置">
+
+        <Preference
+            android:title="微信/钉钉 设置"
+            android:summary="更改抢红包模式，可以防封号"
+            android:key="WECHAT_SETTINGS"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="高级设置">
+        <com.everlastxgb.qianghongbao.widget.CustomSwitchPreference
+            android:title="快速监听通知栏"
+            android:summary="闪电模式，抢红包更快更稳定"
+            android:defaultValue="false"
+            android:key="KEY_NOTIFICATION_SERVICE_TEMP_ENABLE"/>
+
+        <Preference
+            android:title="@string/notify_settings"
+            android:key="NOTIFY_SETTINGS"/>
+    </PreferenceCategory>
+</PreferenceScreen>

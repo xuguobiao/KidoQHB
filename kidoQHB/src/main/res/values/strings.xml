@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Kido抢红包</string>
+    <string name="main_name">抢红包</string>
+    <string name="accessibility_description">启动抢红包服务，支持微信/钉钉。</string>
+    <string name="service_name">Kido抢红包</string>
+    <string name="open_service_title">需要开启辅助服务正常使用</string>
+    <string name="open_service_button">打开辅助服务</string>
+    <string name="open_notify_service">打开通知栏服务</string>
+    <string name="check_update">检查更新</string>
+    <string name="share">分享</string>
+    <string name="tips">找到[Kido抢红包]，然后开启服务即可</string>
+    <string name="qq_settings">QQ设置</string>
+    <string name="wechat_settings">微信/钉钉 设置</string>
+    <string name="notify_settings">红包提醒设置</string>
+
+    <string name="follow_preference_title">关注Kido微信</string>
+    <string name="follow_preference_summary">可以跟我交流各种有趣的东西</string>
+
+    <string name="donate_title">打赏开发者</string>
+    <string name="donate_summary">如果这个App能帮到你，可以打赏我哦</string>
+
+    <string name="beforeuse_title">使用前须知</string>
+    <string name="beforeuse_summary">使用前请先阅读，保证抢红包正常进行</string>
+    <string name="beforeuse_note">本应用可以帮助你自动抢红包，包括微信、钉钉。\n\n1.请先按提示开启辅助服务。\n2.请开启微信/钉钉的“消息通知模式”（关闭“免打扰”）。\n3.锁屏情况下不会自动抢，只会提醒。(所以若想一直保持自动抢，请勿锁屏)\n\n注：由于钉钉的限制，钉钉的自动拆红包需要获取Root权限。（微信则无需）</string>
+
+    <string name="after_open_hongbao">拆红包</string>
+    <string name="after_open_see">看看大家的手气(仅支持微信6.3.8版本以下)</string>
+    <string name="after_open_none">静静地看着</string>
+
+    <string name="after_get_back_home">返回桌面</string>
+    <string name="after_get_none">静静地看着</string>
+
+    <string name="wx_mode_0">自动抢</string>
+    <string name="wx_mode_1">抢单聊红包，群聊红包只通知（微信）</string>
+    <string name="wx_mode_2">抢群聊红包，单聊红包只通知（微信）</string>
+    <string name="wx_mode_3">通知手动抢(防封号)</string>
+
+    <string name="feedback_title">意见反馈</string>
+
+    <string name="about_title">关于Kido抢红包</string>
+    <string name="about_url">https://www.pgyer.com/kido_qhb</string>
+
+    <string name="agreement_title">免责声明</string>
+    <string name="agreement_message">本软件仅供学习使用，完全模拟人工操作，抢红包速度取决于你手机的性能与网络，不涉及任何第三方软件接口，本软件已开放源代码，无病毒、不收集用户隐私信息，禁止使用本软件参与赌博活动。一切因使用“%1$s”造成的任何后果，%1$s概不负责，亦不承担任何法律责任!</string>
+
+    <string name="qr_wx_id">everlastxgb</string>
+    <string name="qr_tips">点击复制微信号:everlastxgb</string>
+
+    <string name="dialog_btn_iknown">我知道了</string>
+
+</resources>

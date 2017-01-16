@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_open_service"
+        android:title="@string/open_service_button"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_open_notify"
+        android:title="@string/open_notify_service"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_feedback"
+        android:title="@string/feedback_title"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/about_title"
+        app:showAsAction="never" />
+</menu>
