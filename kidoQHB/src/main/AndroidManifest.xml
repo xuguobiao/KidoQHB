@@ -21,6 +21,8 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- 允许程序录制音频 -->
     <!-- 可选-->
     <uses-permission android:name="android.permission.READ_LOGS" /> <!-- 获取logcat日志 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <permission
         android:name="com.everlastxgb.qianghongbao.permission.MIPUSH_RECEIVE"
@@ -93,6 +95,10 @@
             android:name="PGYER_APPID"
             android:value="" >
         </meta-data>
+
+        <!-- Talking Data start-->
+        <meta-data android:name="TD_APP_ID" android:value="" />
+        <meta-data android:name="TD_CHANNEL_ID" android:value="default" />
     </application>
 
 </manifest>

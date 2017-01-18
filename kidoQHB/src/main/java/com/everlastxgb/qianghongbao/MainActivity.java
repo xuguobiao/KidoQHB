@@ -32,6 +32,8 @@ import com.everlastxgb.qianghongbao.util.CommonUtils;
 import com.pgyersdk.crash.PgyCrashManager;
 import com.pgyersdk.feedback.PgyFeedback;
 import com.pgyersdk.update.PgyUpdateManager;
+import com.tendcloud.tenddata.TCAgent;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
 
@@ -73,6 +75,8 @@ public class MainActivity extends BaseSettingsActivity {
 
         PgyCrashManager.register(this);
         PgyUpdateManager.register(this);
+        MobclickAgent.setCatchUncaughtExceptions(true);
+        TCAgent.setReportUncaughtExceptions(true);
     }
 
 

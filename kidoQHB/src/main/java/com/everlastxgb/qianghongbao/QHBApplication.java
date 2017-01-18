@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.pgyersdk.crash.PgyCrashManager;
+import com.tendcloud.tenddata.TCAgent;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -45,21 +46,26 @@ public class QHBApplication extends Application {
 
     /** 每个activity生命周期里的onResume*/
     public static void activityResumeStatistics(Activity activity) {
+        MobclickAgent.onResume(activity);
+        TCAgent.onResume(activity);
 
     }
 
     /** 每个activity生命周期里的onPause*/
     public static void activityPauseStatistics(Activity activity) {
-
+        MobclickAgent.onPause(activity);
+        TCAgent.onPause(activity);
     }
 
     /** 事件统计*/
     public static void eventStatistics(Context context, String event) {
         MobclickAgent.onEvent(context, event);
+        TCAgent.onEvent(context, event);
     }
 
     /** 事件统计*/
     public static void eventStatistics(Context context, String event, String tag) {
         MobclickAgent.onEvent(context, event, tag);
+        TCAgent.onEvent(context, event, tag);
     }
 }
