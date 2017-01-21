@@ -1,6 +1,6 @@
 #Kido抢红包外挂
 
-> 本应用参(抄)考(袭)[CodeBoy的微信抢红包](https://github.com/lendylongli/qianghongbao)(利用AccessibilityService辅助功能)，在其基础上加入了钉钉抢红包，同时做了一些小整改。可以帮助你自动抢红包，包括微信、钉钉。
+> 本应用参(抄)考(袭)[CodeBoy的微信抢红包](https://github.com/lendylongli/qianghongbao)(利用AccessibilityService辅助功能)，在其基础上加入了钉钉抢红包，同时做了一些小整改。可以帮助你自动抢微信红包、钉钉红包。
 
 ## 自动抢红包大致流程
 
