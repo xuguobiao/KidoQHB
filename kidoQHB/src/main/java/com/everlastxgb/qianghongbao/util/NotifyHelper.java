@@ -4,12 +4,12 @@ import android.app.KeyguardManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
 import android.os.PowerManager;
 import android.os.Vibrator;
 
 import com.everlastxgb.qianghongbao.Config;
+import com.everlastxgb.qianghongbao.R;
 
 import java.util.Calendar;
 
@@ -29,7 +29,7 @@ public class NotifyHelper {
     public static void sound(Context context) {
         try {
             MediaPlayer player = MediaPlayer.create(context,
-                    Uri.parse("file:///system/media/audio/ui/camera_click.ogg"));
+                    R.raw.shake_match);
             player.start();
         } catch (Exception e) {
             e.printStackTrace();
