@@ -19,7 +19,6 @@
 ## 应用截图
 
 ![App主界面](app_main.png)
-
 ![App使用前须知](app_mustknow.png)
 
 ## 其它
