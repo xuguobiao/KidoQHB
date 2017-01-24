@@ -50,14 +50,18 @@ public class DingtalkAccessbilityJob extends BaseAccessbilityJob {
      * 红包消息的关键字
      */
     private static final String HONGBAO_TEXT_KEY = "[红包]";
+    private static final String HONGBAO_TEXT_KEY_1 = "[新春红包]";
     private static final String SEEHONGBAO_TEXT_KEY = "查看红包";
+    private static final String SEEDETAIL_TEXT_KEY = "查看详情";
 
-    private static final String BUTTON_CLASS_NAME = "android.widget.Button";
-    private static final String IMAGEBUTTON_CLASS_NAME = "android.widget.ImageButton";
+    private static final String CLASS_NAME_BUTTON = "android.widget.Button";
+    private static final String CLASS_NAME_IMAGEBUTTON = "android.widget.ImageButton";
+    private static final String CLASS_NAME_LISTVIEW = "android.widget.ListView";
 
     private static final String PAGE_HOME = "com.alibaba.android.rimet.biz.home.activity.HomeActivity"; // APP主页面
     private static final String PAGE_CHAT = "com.alibaba.android.dingtalkim.activities.ChatMsgActivity"; // 聊天页面
     private static final String PAGE_PICKREDPACKETS = "com.alibaba.android.dingtalk.redpackets.activities.PickRedPacketsActivity"; // 拆红包页面
+    private static final String PAGE_PICKREDPACKETS_1 = "com.alibaba.android.dingtalk.redpackets.activities.FestivalRedPacketsPickActivity"; // 拆红包页面(新春红包)
     private static final String PAGE_REDPACKETSDETAIL = "com.alibaba.android.dingtalk.redpackets.activities.RedPacketsDetailActivity"; // 红包详情页
 
 
@@ -70,6 +74,7 @@ public class DingtalkAccessbilityJob extends BaseAccessbilityJob {
     private static final int WINDOW_LUCKYMONEY_DETAIL = 2;
     private static final int WINDOW_LAUNCHER = 3;
     private static final int WINDOW_CHAT = 4;
+    private static final int WINDOW_FESTIVAL = 5;
     private static final int WINDOW_OTHER = -1;
 
     private int mCurrentWindow = WINDOW_NONE;
@@ -147,7 +152,7 @@ public class DingtalkAccessbilityJob extends BaseAccessbilityJob {
         } else if (eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
             openHongBao(event);
         } else if (eventType == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
-            if (mCurrentWindow != WINDOW_LAUNCHER) { //不在聊天界面或聊天列表，不处理
+            if (mCurrentWindow != WINDOW_LAUNCHER && mCurrentWindow != WINDOW_CHAT &&  mCurrentWindow != WINDOW_FESTIVAL) { //不在聊天界面或聊天列表，不是新春红包，不处理
                 return;
             }
             if (isReceivingHongbao) {
@@ -168,7 +173,7 @@ public class DingtalkAccessbilityJob extends BaseAccessbilityJob {
      */
     private void notificationEvent(String ticker, Notification nf) {
         String text = ticker;
-        if (text.startsWith(HONGBAO_TEXT_KEY)) { //红包消息
+        if (text.startsWith(HONGBAO_TEXT_KEY) || text.startsWith(HONGBAO_TEXT_KEY_1)) { //红包消息
             newHongBaoNotification(nf);
         }
     }
@@ -196,7 +201,7 @@ public class DingtalkAccessbilityJob extends BaseAccessbilityJob {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void openHongBao(AccessibilityEvent event) {
-        if (PAGE_PICKREDPACKETS.equals(event.getClassName())) {
+        if (PAGE_PICKREDPACKETS.equals(event.getClassName()) || PAGE_PICKREDPACKETS_1.equals(event.getClassName())) {
             mCurrentWindow = WINDOW_LUCKYMONEY_RECEIVEUI;
             //点中了红包，下一步就是去拆红包
             handleLuckyMoneyReceive();
@@ -208,7 +213,7 @@ public class DingtalkAccessbilityJob extends BaseAccessbilityJob {
             }
         } else if (PAGE_HOME.equals(event.getClassName())) {
             mCurrentWindow = WINDOW_LAUNCHER;
-            //在聊天界面,去点中红包
+            //在聊天列表,去点中红包
             handleChatListHongBao();
         } else if (PAGE_CHAT.equals(event.getClassName())) {
             mCurrentWindow = WINDOW_CHAT;
@@ -230,15 +235,20 @@ public class DingtalkAccessbilityJob extends BaseAccessbilityJob {
         }
 
         AccessibilityNodeInfo targetNode = null;
-
         int event = getConfig().getWechatAfterOpenHongBaoEvent();
         if (event == Config.WX_AFTER_OPEN_HONGBAO) { //拆红包
-            targetNode = AccessibilityHelper.findNodeInfosByClassName(nodeInfo, IMAGEBUTTON_CLASS_NAME);
+            targetNode = AccessibilityHelper.findNodeInfosByClassName(nodeInfo, CLASS_NAME_IMAGEBUTTON); // 普通红包
+            if (targetNode == null) {
+                targetNode = AccessibilityHelper.findNodeInfosByClassNameRecursion(nodeInfo, CLASS_NAME_LISTVIEW); // 新春红包
+                if (targetNode != null) {
+                    mCurrentWindow = WINDOW_FESTIVAL;
+                }
+            }
         }
 
         if (targetNode != null) {
-            final AccessibilityNodeInfo node = targetNode;
-            performClickDelay(node); // 钉钉这里的imageButton不是真正的中间拆红包那个点，所以这里点击node会没反应。
+//            final AccessibilityNodeInfo node = targetNode;
+//            performClickDelay(node); // 钉钉这里的imageButton不是真正的中间拆红包那个点，所以这里点击node会没反应。
 
             Rect rect = new Rect();
             targetNode.getBoundsInScreen(rect);// 由于拿到node不是中间的“拆红包”，这里获取其中心点方便下面模拟点击
@@ -246,7 +256,7 @@ public class DingtalkAccessbilityJob extends BaseAccessbilityJob {
             int screenY = rect.centerY();
 
             CommonUtils.execTap(screenX, screenY); // 这里通过命令模拟点击，需要root权限。
-            QHBApplication.eventStatistics(getContext(), "open_hongbao_dingtalk");
+            QHBApplication.eventStatistics(getContext(), "open_hongbao_dingtalk", targetNode.toString());
         }
     }
 
@@ -279,7 +289,7 @@ public class DingtalkAccessbilityJob extends BaseAccessbilityJob {
 
         if (list != null && list.isEmpty()) {
             // 从消息列表查找红包
-            final AccessibilityNodeInfo node = AccessibilityHelper.findNodeInfosByText(nodeInfo, HONGBAO_TEXT_KEY);
+            final AccessibilityNodeInfo node = AccessibilityHelper.findNodeInfosByTexts(nodeInfo, HONGBAO_TEXT_KEY, HONGBAO_TEXT_KEY_1);
             if (node != null) {
                 if (BuildConfig.DEBUG) {
                     Log.i(TAG, "-->钉钉红包:" + node);
