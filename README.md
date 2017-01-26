@@ -77,4 +77,4 @@
 
  - [源码下载地址](https://github.com/xuguobiao/KidoQHB)
  
- - [apk下载地址](https://www.pgyer.com/kido_qhb)
+ - [apk下载地址](https://fir.im/kidoQHB)
